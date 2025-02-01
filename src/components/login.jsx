@@ -16,6 +16,7 @@ import Error from "./error";
 import useFetch from "../hooks/use-fetch";
 import { login } from "../db/apiAuth";
 import { useNavigate } from "react-router-dom";
+import { UrlState } from "../context";
 
 
 const Login = () => {
@@ -39,10 +40,14 @@ const Login = () => {
 
   const { data, error, loading, fn: fnLogin } = useFetch(login, formData);
 
+  // Creating an object for keeping track of UrlState
+  const {fetchUser} = UrlState();
+
   useEffect(() => {
     console.log(data);
     if (error === null && data) {
       navigate('/dashboard');
+      fetchUser();
     }
   }, [data, error])
 
