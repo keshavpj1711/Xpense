@@ -13,10 +13,15 @@ export async function login({ email, password }) {
 
 export async function signup({ userName, email, password }) {
   const { data, error } = await supabase.auth.signUp({
-    userName,
-    email,
-    password,
+    email: email,
+    password: password,
+    options: {
+      data: {
+        user_name: userName,
+      }
+    },
   });
+  
 
   if (error) throw new Error(error.message);
 

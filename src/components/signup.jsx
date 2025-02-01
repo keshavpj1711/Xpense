@@ -16,6 +16,7 @@ import Error from "./error";
 import useFetch from "../hooks/use-fetch";
 import { signup } from "../db/apiAuth";
 import { useNavigate } from "react-router-dom";
+import { UrlState } from "../context";
 
 
 const SignUp = (props) => {
@@ -38,11 +39,13 @@ const SignUp = (props) => {
   };
 
   const { data, error, loading, fn: fnSignUp } = useFetch(signup, formData);
+  const{fetchUser} = UrlState();
 
   useEffect(() => {
     console.log(data);
     if (error === null && data) {
       navigate('/dashboard');
+      fetchUser();
     }
   }, [data, error])
 
@@ -97,9 +100,8 @@ const SignUp = (props) => {
         </CardContent>
         <CardFooter>
           <Button variant="outline" onClick={handleSignUp}>
-            {loading ? <BeatLoader size={10} color="blue" /> : "Sign Up"}
+            {loading ? <BeatLoader size={10} color="#3b82f6" /> : "Sign Up"}
           </Button>
-
         </CardFooter>
       </Card>
 
