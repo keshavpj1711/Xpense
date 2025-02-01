@@ -6,6 +6,7 @@ import DashboardPage from './pages/dashboard';
 import AuthenticationPage from './pages/auth';
 import ExpensePage from './pages/expense';
 import IncomePage from './pages/income';
+import UrlProvider from './context';
 
 const router = createBrowserRouter([
 	{
@@ -38,7 +39,11 @@ const router = createBrowserRouter([
 function App() {
 
 	return (
-		<RouterProvider router={router} />
+		// By wrapping this whole app in UrlProvider, it allows to access 
+		// all the values that it provides to be accessible everywhere
+		<UrlProvider>
+			<RouterProvider router={router} />
+		</UrlProvider>
 	)
 }
 
