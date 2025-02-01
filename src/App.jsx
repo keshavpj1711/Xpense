@@ -7,6 +7,7 @@ import AuthenticationPage from './pages/auth';
 import ExpensePage from './pages/expense';
 import IncomePage from './pages/income';
 import UrlProvider from './context';
+import RequireAuth from './components/require-auth';
 
 const router = createBrowserRouter([
 	{
@@ -16,17 +17,18 @@ const router = createBrowserRouter([
 				path: '/',
 				element: <LandingPage /> 
 			},
+			// Password protected pages using the code in the Require Auth function in the require-auth.jsx
 			{
 				path: '/dashboard',
-				element: <DashboardPage />
+				element: <RequireAuth><DashboardPage /></RequireAuth>
 			},
 			{
 				path: '/expense',
-				element: <ExpensePage />
+				element: <RequireAuth><ExpensePage /></RequireAuth>
 			},
 			{
 				path: '/income',
-				element: <IncomePage />
+				element: <RequireAuth><IncomePage /></RequireAuth>
 			},
 			{
 				path: '/auth',
