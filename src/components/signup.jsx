@@ -22,8 +22,7 @@ const SignUp = (props) => {
   const [errors, setErrors] = useState({})
 
   const [formData, setFormData] = useState({
-    first_name: "",
-    last_name: "",
+    userName: "",
     email: "",
     password: "",
   });
@@ -52,10 +51,8 @@ const SignUp = (props) => {
     setErrors([]);
     try {
       const schema = Yup.object().shape({
-        first_name: Yup.string()
-          .required("First Name is Required"),
-        last_name: Yup.string()
-          .required("Last Name is Required"),
+        userName: Yup.string()
+          .required("User Name is Required"),
         email: Yup.string()
           .email("Invalid email")
           .required("Email is required"),
@@ -84,16 +81,10 @@ const SignUp = (props) => {
           <CardDescription>Don't have an account? Sign Up now</CardDescription>
           {error && <Error message={error.message} />}
         </CardHeader>
-        <CardContent className="space-y-4">
-          <div className="grid md:grid-cols-2">
-            <div className="block">
-              <Input name="first_name" type="text" placeholder="Enter First Name" onChange={handleInputChange} />
-              {errors.first_name && <Error message={errors.first_name} />}
-            </div>
-            <div className="block ml-2">
-              <Input name="last_name" type="text" placeholder="Enter Last Name" onChange={handleInputChange} />
-              {errors.last_name && <Error message={errors.last_name} />}
-            </div>
+        <CardContent className="space-y-2">
+          <div className="space-y-1">
+            <Input name="userName" type="userName" placeholder="Enter Username" onChange={handleInputChange} />
+            {errors.userName && <Error message={errors.userName} />}
           </div>
           <div className="space-y-1">
             <Input name="email" type="email" placeholder="Enter Email" onChange={handleInputChange} />
