@@ -4,8 +4,7 @@ import AppLayout from './layouts/app-layout';
 import LandingPage from './pages/landing';
 import DashboardPage from './pages/dashboard';
 import AuthenticationPage from './pages/auth';
-import ExpensePage from './pages/expense';
-import IncomePage from './pages/income';
+import TransactionPage from './pages/transaction';
 import UrlProvider from './context';
 import RequireAuth from './components/require-auth';
 
@@ -23,12 +22,8 @@ const router = createBrowserRouter([
 				element: <RequireAuth><DashboardPage /></RequireAuth>
 			},
 			{
-				path: '/expense',
-				element: <RequireAuth><ExpensePage /></RequireAuth>
-			},
-			{
-				path: '/income',
-				element: <RequireAuth><IncomePage /></RequireAuth>
+				path: '/transaction',
+				element: <RequireAuth><TransactionPage /></RequireAuth>
 			},
 			{
 				path: '/auth',
