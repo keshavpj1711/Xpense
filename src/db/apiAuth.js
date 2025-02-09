@@ -25,6 +25,26 @@ export async function signup({ userName, email, password }) {
 
   if (error) throw new Error(error.message);
 
+  // Ensure the user was created successfully
+  const user = data.user;
+  if (!user) throw new Error("User signup failed");
+
+  // Insert into profiles table
+  // Since we will also be using the profiles table to add new features in future
+  const { error: profileError } = await supabase
+    .from("profiles")
+    .insert([
+      {
+        id: user.id, // Use the same ID from auth.users
+        username: userName,
+        avatar_url: "", // Can be updated later
+        preferred_currency: "INR", // Default currency, update as needed
+        created_at: new Date().toISOString(),
+      },
+    ]);
+
+  if (profileError) throw new Error(profileError.message);
+
   return data;
 }
 
