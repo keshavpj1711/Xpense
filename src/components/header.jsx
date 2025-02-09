@@ -58,7 +58,7 @@ const Header = (props) => {
                 )}
                 {isAuthenticated && (
                     <Button variant="" className="text-color-white" onClick={() => {
-                        // navigate('/dashboard') to be changed when we create a page for transaction
+                        navigate('/transaction/create')
                     }}>
                         <PlusCircle size={18} />
                         <span className="hidden md:inline">Add Transaction</span>
