@@ -7,6 +7,7 @@ import AuthenticationPage from './pages/auth';
 import TransactionPage from './pages/transaction';
 import UrlProvider from './context';
 import RequireAuth from './components/require-auth';
+import CreateTransactionPage from './pages/createTransaction';
 
 const router = createBrowserRouter([
 	{
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
 			{
 				path: '/transaction',
 				element: <RequireAuth><TransactionPage /></RequireAuth>
+			},
+			{
+				path: '/transaction/create',
+				element: <RequireAuth><CreateTransactionPage /></RequireAuth>
 			},
 			{
 				path: '/auth',
