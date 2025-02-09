@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button"
 import Logo from "@/assets/image.png";
@@ -12,13 +12,16 @@ const Header = (props) => {
     const navigate = useNavigate();
 
     // To show what the user should see if logged in or not
-    let toShow = "Log In";
-    const { isAuthenticated } = UrlState();
-    if (isAuthenticated) {
-        toShow = "Log Out";
-    } else {
-        toShow = "Sign In";
-    }
+    const { isAuthenticated, fetchUser } = UrlState();
+    const [toShow, setToShow] = useState("Sign In");
+
+    useEffect(() => {
+        if (isAuthenticated) {
+            setToShow("Log Out");
+        } else {
+            setToShow("Sign In");
+        }
+    }, [isAuthenticated]);
 
     const { loading, fn: fnLogout } = useFetch(logout)
 
@@ -26,8 +29,8 @@ const Header = (props) => {
     const handleClick = () => {
         if (toShow === "Log Out") {
             fnLogout().then(() => {
-                toShow = "Sign In";
                 navigate('/');
+                fetchUser();
             })
         } else {
             navigate('/auth');
@@ -46,7 +49,7 @@ const Header = (props) => {
             </div>
             <div className="gap-2 flex">
                 {isAuthenticated && (
-                    <Button variant="outline" onClick={()=>{
+                    <Button variant="outline" onClick={() => {
                         navigate('/dashboard')
                     }}>
                         <LayoutDashboard size={18} />
@@ -54,7 +57,7 @@ const Header = (props) => {
                     </Button>
                 )}
                 {isAuthenticated && (
-                    <Button variant="outline" onClick={()=>{
+                    <Button variant="" className="text-color-white" onClick={() => {
                         // navigate('/dashboard') to be changed when we create a page for transaction
                     }}>
                         <PlusCircle size={18} />
