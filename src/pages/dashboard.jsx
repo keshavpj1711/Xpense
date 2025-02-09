@@ -17,6 +17,7 @@ import {
 } from "@/components/ui/dropdown-menu"
 
 import { Button } from "@/components/ui/button"
+import MonthlyBreakdown from "../components/pie-chart"
 
 const DashboardPage = () => {
   return (
@@ -71,7 +72,7 @@ const DashboardPage = () => {
                 <CardDescription>A button to toggle account</CardDescription>
               </CardHeader>
               <CardContent>
-                <p>Card Content</p>
+                <MonthlyBreakdown />
               </CardContent>
             </Card>
           </div>
